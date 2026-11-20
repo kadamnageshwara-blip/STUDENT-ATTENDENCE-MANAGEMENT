@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5.1 (Python 3.15.2 on win32)" generated="2026-11-20T22:48:24.108900" rpa="false" schemaversion="5">
+<suite id="s1" name="Attendance E2E" source="C:\Users\Nages\OneDrive\Desktop\Attendance-SQA\attendance_e2e.robot">
+<kw name="Reset Attendance And Open Browser" type="SETUP">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-20T22:48:24.469330" level="INFO">${req} = &lt;urllib.request.Request object at 0x00000238A494ABA0&gt;</msg>
+<var>${req}</var>
+<arg>__import__('importlib').import_module('urllib.request').Request('${URL}/api/reset', method='POST')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-20T22:48:24.468075" elapsed="0.001356"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<arg>__import__('importlib').import_module('urllib.request').urlopen($req)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-20T22:48:24.469733" elapsed="0.043534"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:24.514554" level="INFO">Opening browser 'Chrome' to base url 'http://127.0.0.1:5000'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-20T22:48:24.514099" elapsed="2.653453"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.167905" elapsed="0.047918"/>
+</kw>
+<status status="PASS" start="2026-11-20T22:48:24.466791" elapsed="2.749509"/>
+</kw>
+<test id="s1-t1" name="TC01 Valid Student Attendance Marking E2E" line="11">
+<kw name="Submit Student Attendance">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:27.219576" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.219224" elapsed="0.053755"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=student_id</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.273390" elapsed="0.038976"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:27.313682" level="INFO">Typing text '101' into text field 'id=student_id'.</msg>
+<arg>id=student_id</arg>
+<arg>${student_id}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.312933" elapsed="0.113816"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:27.427712" level="INFO">Clicking button 'id=submit_btn'.</msg>
+<arg>id=submit_btn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.427203" elapsed="0.116588"/>
+</kw>
+<arg>101</arg>
+<status status="PASS" start="2026-11-20T22:48:27.218395" elapsed="0.325684"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Success: Attendance marked</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.544739" elapsed="0.226610"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:27.772748" level="INFO">Verifying element 'id=message' contains exact text 'Success: Attendance marked'.</msg>
+<arg>id=message</arg>
+<arg>Success: Attendance marked</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.772096" elapsed="0.026658"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:27.800146" level="INFO">Verifying element 'id=count' contains exact text '1'.</msg>
+<arg>id=count</arg>
+<arg>1</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.799553" elapsed="0.022323"/>
+</kw>
+<doc>Automatically submits valid student ID 101 and checks count = 1.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.216578" elapsed="0.606136"/>
+</test>
+<test id="s1-t2" name="TC02 Duplicate Attendance Prevention E2E" line="18">
+<kw name="Submit Student Attendance">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:27.827384" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.827012" elapsed="0.054767"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=student_id</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.882230" elapsed="0.018743"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:27.902123" level="INFO">Typing text '101' into text field 'id=student_id'.</msg>
+<arg>id=student_id</arg>
+<arg>${student_id}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.901430" elapsed="0.096265"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:27.998804" level="INFO">Clicking button 'id=submit_btn'.</msg>
+<arg>id=submit_btn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.998163" elapsed="0.081788"/>
+</kw>
+<arg>101</arg>
+<status status="PASS" start="2026-11-20T22:48:27.825918" elapsed="0.254299"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Error: Attendance already marked</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.080737" elapsed="0.233838"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:28.316631" level="INFO">Verifying element 'id=message' contains exact text 'Error: Attendance already marked'.</msg>
+<arg>id=message</arg>
+<arg>Error: Attendance already marked</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.315682" elapsed="0.030260"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:28.347769" level="INFO">Verifying element 'id=count' contains exact text '1'.</msg>
+<arg>id=count</arg>
+<arg>1</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.347138" elapsed="0.026465"/>
+</kw>
+<doc>Automatically re-submits student ID 101 and blocks duplicate.</doc>
+<status status="PASS" start="2026-11-20T22:48:27.824372" elapsed="0.550080"/>
+</test>
+<test id="s1-t3" name="TC03 Invalid Student ID Error E2E" line="25">
+<kw name="Submit Student Attendance">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:28.380899" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.380394" elapsed="0.078334"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=student_id</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.459200" elapsed="0.028879"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:28.489251" level="INFO">Typing text '999' into text field 'id=student_id'.</msg>
+<arg>id=student_id</arg>
+<arg>${student_id}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.488558" elapsed="0.120326"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:28.610456" level="INFO">Clicking button 'id=submit_btn'.</msg>
+<arg>id=submit_btn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.609731" elapsed="0.189457"/>
+</kw>
+<arg>999</arg>
+<status status="PASS" start="2026-11-20T22:48:28.378481" elapsed="0.420971"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Error: Invalid Student ID</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.800295" elapsed="0.017533"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:28.819843" level="INFO">Verifying element 'id=message' contains exact text 'Error: Invalid Student ID'.</msg>
+<arg>id=message</arg>
+<arg>Error: Invalid Student ID</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.819171" elapsed="0.029786"/>
+</kw>
+<doc>Automatically submits invalid ID 999 and verifies error.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.376356" elapsed="0.473417"/>
+</test>
+<test id="s1-t4" name="TC04 Second Valid Student Increments Count E2E" line="31">
+<kw name="Submit Student Attendance">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:28.853895" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.853605" elapsed="0.072089"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=student_id</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.926132" elapsed="0.032774"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:28.960160" level="INFO">Typing text '102' into text field 'id=student_id'.</msg>
+<arg>id=student_id</arg>
+<arg>${student_id}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.959474" elapsed="0.176827"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:29.137351" level="INFO">Clicking button 'id=submit_btn'.</msg>
+<arg>id=submit_btn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.136775" elapsed="0.182945"/>
+</kw>
+<arg>102</arg>
+<status status="PASS" start="2026-11-20T22:48:28.852889" elapsed="0.467096"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Success: Attendance marked</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.320858" elapsed="0.013918"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:29.336155" level="INFO">Verifying element 'id=message' contains exact text 'Success: Attendance marked'.</msg>
+<arg>id=message</arg>
+<arg>Success: Attendance marked</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.335501" elapsed="0.021748"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:29.359082" level="INFO">Verifying element 'id=count' contains exact text '2'.</msg>
+<arg>id=count</arg>
+<arg>2</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.358194" elapsed="0.021508"/>
+</kw>
+<doc>Automatically submits valid student ID 102 and checks count = 2.</doc>
+<status status="PASS" start="2026-11-20T22:48:28.851563" elapsed="0.528801"/>
+</test>
+<test id="s1-t5" name="TC05 Blank Student ID Validation E2E" line="38">
+<kw name="Submit Student Attendance">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:29.384549" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.384222" elapsed="0.055660"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=student_id</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.440309" elapsed="0.030376"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:29.471656" level="INFO">Typing text '' into text field 'id=student_id'.</msg>
+<arg>id=student_id</arg>
+<arg>${student_id}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.471086" elapsed="0.084160"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:29.555996" level="INFO">Clicking button 'id=submit_btn'.</msg>
+<arg>id=submit_btn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.555557" elapsed="0.100831"/>
+</kw>
+<arg>${EMPTY}</arg>
+<status status="PASS" start="2026-11-20T22:48:29.383150" elapsed="0.273518"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Error: Student ID is required</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.657715" elapsed="0.290094"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-20T22:48:29.949404" level="INFO">Verifying element 'id=message' contains exact text 'Error: Student ID is required'.</msg>
+<arg>id=message</arg>
+<arg>Error: Student ID is required</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.948802" elapsed="0.024309"/>
+</kw>
+<doc>Automatically submits empty input and verifies required ID error.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.381837" elapsed="0.592154"/>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-11-20T22:48:29.976494" elapsed="2.286987"/>
+</kw>
+<status status="PASS" start="2026-11-20T22:48:24.111626" elapsed="8.152003"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Attendance E2E" id="s1" pass="5" fail="0" skip="0">Attendance E2E</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
